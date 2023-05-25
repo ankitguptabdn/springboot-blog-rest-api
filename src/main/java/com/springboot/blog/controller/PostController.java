@@ -12,7 +12,8 @@ import java.util.List;
 @RequestMapping("/api/posts")
 public class PostController {
     private PostService postService;
-    public PostController(PostService postService) {
+    public PostController(PostService postService)
+    {
         this.postService = postService;
     }
     //Create blog Post
@@ -22,7 +23,11 @@ public class PostController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PostDto>> getAllPosts(){
-        return ResponseEntity.ok(postService.getAllPosts()) ;
+    public List<PostDto> getAllPosts(){
+        return postService.getAllPosts();
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<PostDto> getPostById(@PathVariable (name = "id") long id){
+        return ResponseEntity.ok(postService.getPostById(id));
     }
 }
